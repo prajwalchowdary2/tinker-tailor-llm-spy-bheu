@@ -3,7 +3,7 @@ TINKER TAILOR LLM SPY — TOOL SUMMARY & OPEN-SOURCE REPOSITORY
 ======================================================================
 
 1. OFFICIAL GITHUB REPOSITORY LINK:
-https://github.com/prajwalchowdary2/tinker-tailor-llm-spy
+https://github.com/prajwalchowdary2/tinker-tailor-llm-spy-bheu
 
 ----------------------------------------------------------------------
 2. TOOL OVERVIEW:
