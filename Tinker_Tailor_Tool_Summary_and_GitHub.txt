@@ -1,0 +1,29 @@
+======================================================================
+TINKER TAILOR LLM SPY — TOOL SUMMARY & OPEN-SOURCE REPOSITORY
+======================================================================
+
+1. OFFICIAL GITHUB REPOSITORY LINK:
+https://github.com/prajwalchowdary2/tinker-tailor-llm-spy
+
+----------------------------------------------------------------------
+2. TOOL OVERVIEW:
+Tinker Tailor LLM Spy is a specialized, zero-dependency, sub-50ms client-side forensic carving and threat-hunting framework designed to extract, reconstruct, and inspect Large Language Model (LLM) telemetry from volatile local storage cache files. 
+
+While traditional forensic suites (like Autopsy or Magnet AXIOM) fail to interpret non-standard web cache database schemas, Tinker Tailor LLM Spy reverse-engineers Chromium V8 serialization byte layouts, Claude TipTap draft keystroke buffers, and IDE JSONL agent transcripts.
+
+----------------------------------------------------------------------
+3. KEY CAPABILITIES & FEATURES:
+* V8 IndexedDB Conversation Tree Carver: Parses uncompacted Chrome/Edge LevelDB SSTables (.sst/.ldb) and log files to reconstruct 100% of deleted ChatGPT, Gemini, DeepSeek, and Perplexity conversation nodes and parent-child message trees.
+* Claude TipTap Keystroke Draft Recovery: Extracts unsubmitted draft inputs stored inside Claude's tipTapEditorState JSON cache before the user clicks 'Send'.
+* IDE Agent Telemetry Carving: Automatically traverses Cursor and VS Code Copilot workspaces, parsing raw JSONL conversation transcripts.
+* Real-Time Shadow AI DLP Engine: Inspects carved prompts on-the-fly, flagging leaked credentials (such as AWS keys, Slack tokens, OpenAI API keys) and PII inside chat bubbles with severity badges.
+* 41ms Infostealer Threat Vector: Features a headless Python proof-of-concept (verity_stealer.py) demonstrating how an adversary can harvest local LLM telemetry in under 50 milliseconds before standard EDR solutions flag anomalies.
+
+----------------------------------------------------------------------
+4. RESEARCH AUTHORS & AFFILIATION:
+1. Dr. Sapna V M (Associate Professor, Dept of CSE, PES University, Bangalore) - sapnavm@pes.edu
+2. Prajwal Chowdary (Student & Researcher, Dept of CSE, PES University, Bangalore) - prajwalchowdary5@gmail.com
+3. Prasad H B (Professor & Director of ISFCR, Dept of CSE, PES University, Bangalore) - prasadhb@pes.edu
+
+Institution: Department of Computer Science & Engineering, PES University, Bangalore, India
+======================================================================
