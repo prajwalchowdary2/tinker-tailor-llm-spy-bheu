@@ -1,0 +1,77 @@
+======================================================================
+BLACK HAT EUROPE BRIEFINGS SUBMISSION
+TINKER TAILOR LLM SPY: RECONSTRUCTING "DELETED" CHATS & HIJACKING SESSIONS FROM CHROMIUM LEVELDB CACHES
+======================================================================
+
+1. PROPOSAL & SUBMISSION METADATA
+----------------------------------------------------------------------
+* Title: Tinker Tailor LLM Spy: Reconstructing "Deleted" Chats & Hijacking Sessions from Chromium LevelDB Caches
+* Target Venue: Black Hat Europe Briefings
+* Track / Category: Enterprise Security / Malware Analysis & Incident Response / Applied AI Security
+* Format: 40-Minute Briefing / 50-Minute Arsenal Demonstration
+* Primary Contact Email: prajwalchowdary5@gmail.com
+
+Official Open-Source Repository URL:
+https://github.com/prajwalchowdary2/tinker-tailor-llm-spy-bheu
+
+----------------------------------------------------------------------
+2. RESEARCH AUTHORS & AFFILIATION
+----------------------------------------------------------------------
+1. Dr. Sapna V M (Associate Professor, Dept of CSE, PES University, Bangalore) - sapnavm@pes.edu
+2. Prajwal Chowdary (Student & Researcher, Dept of CSE, PES University, Bangalore) - prajwalchowdary5@gmail.com
+3. Prasad H B (Professor & Director of ISFCR, Dept of CSE, PES University, Bangalore) - prasadhb@pes.edu
+
+Institution: Department of Computer Science & Engineering, PES University, Bangalore, India
+
+----------------------------------------------------------------------
+3. ABSTRACT
+----------------------------------------------------------------------
+As Large Language Model (LLM) web portals and Electron wrapper clients become ubiquitous enterprise tools, confidential source code, API keys, and sensitive corporate configurations are routinely processed by endpoints. When a user clicks "Delete Chat" inside ChatGPT, Claude, Gemini, or Perplexity interfaces, cloud servers flag records for deletion. On local endpoints, however, Chromium-based browsers (Chrome, Edge) store telemetry inside IndexedDB databases backed by Google's LevelDB log-structured merge-tree (LSM-tree) storage engine. Because LevelDB uses sequential append-only write-ahead log files (.log) and uncompacted Sorted String Tables (.sst/.ldb), "deleted" prompts and assistant responses remain intact on disk until compaction occurs—a process that can take hours, days, or never happen if database volume remains small.
+
+This submission presents Tinker Tailor LLM Spy, a zero-dependency, pure-Python forensic carving and threat-hunting framework. We dissect raw V8 binary serialization byte layouts, protocol buffer varint encoding, Smi-shifted array indices, and Claude TipTap draft keystroke buffers without relying on C++ compiled LevelDB drivers or triggering database locks. Finally, we demonstrate a sub-50ms headless threat vector and outline cryptographic chain-of-custody protocols for digital forensics and incident response (DFIR) teams.
+
+----------------------------------------------------------------------
+4. DETAILED TECHNICAL OUTLINE & RESEARCH BREAKDOWN
+----------------------------------------------------------------------
+
+SECTION 1: THE EPHEMERAL AI FALLACY
+* Endpoint Vulnerability Window: Deletion calls on LLM web apps only remove server-side database indices. Endpoint LevelDB storage retains uncompacted data blocks.
+* Multi-Application Footprint: IndexedDB LevelDB instances for ChatGPT, Claude, DeepSeek, Perplexity; Cursor IDE agent transcripts; VS Code Copilot SQLite state databases.
+
+SECTION 2: LEVELDB LSM-TREE STORAGE ARCHITECTURE
+* Write-Ahead Log (.log): Active sequential writes flushed before memtable persistence.
+* Sorted String Tables (.sst / .ldb): Leveled storage structure (Levels 0 through 6) compressed with Snappy.
+* Exclusive Lock Bypass: Operating system file handles allow read-only binary stream operations on active write-ahead logs, enabling live endpoint carving during active user sessions without causing browser crash or database lock errors.
+
+SECTION 3: V8 BINARY SERIALIZATION REVERSE ENGINEERING
+* Protocol Buffer Varint Decoding: Bit 7 continuation flag parsing for variable-length integers.
+* UTF-16LE String Tag Parsing (0x63): V8 serializes UTF-16LE strings with byte-length varint prefixes (not character counts). Overshooting byte lengths corrupts all downstream message properties.
+* Smi-Shifted Array Keys: V8 Small Integers (Smis) are encoded via a 1-bit left shift (encoded = actual << 1). 
+  - Odd actual indices (e.g., encoded 2 -> actual 1) represent User Prompts.
+  - Even actual indices (e.g., encoded 4 -> actual 2) represent Assistant Responses.
+* Nesting Depth Tracking: dynamic depth incrementing on object (0x6f) and array (0x61) tags, preventing premature termination when encountering nested property closing tags (0x7b).
+
+SECTION 4: REAL-TIME SHADOW AI DLP ENGINE & CHAIN OF CUSTODY
+* DLP Credential Scanning: Real-time regex pattern matching across carved payloads for leaked AWS Access Keys (AKIA/AGPA), OpenAI API Keys (sk-...), Slack tokens, and PII.
+* Cryptographic Integrity Seal: HMAC-SHA256 signature calculated over canonical evidence payloads. Verified client-side in dashboard UI via Web Cryptography API (window.crypto.subtle.verify).
+
+SECTION 5: 41ms INFOSTEALER THREAT VECTOR BENCHMARK
+* Headless Python PoC (verity_stealer.py): Demonstrates how an adversary with local unprivileged execution can extract session tokens, draft keystrokes, and prompts in under 50 milliseconds before standard EDR solutions issue alerts.
+
+SECTION 6: ENTERPRISE MITIGATIONS
+1. MDM / GPO Browser Clean-up Policies: Mandate explicit LevelDB and IndexedDB clearing upon browser exit.
+2. Full Disk Encryption: Enforce BitLocker (Windows) / FileVault (macOS) to prevent offline drive extraction.
+3. EDR Behavioral Path Rules: Flag unprivileged process reads targeting Chromium profile IndexedDB paths (%LOCALAPPDATA%\Google\Chrome\User Data\*\IndexedDB\*.indexeddb.leveldb).
+
+----------------------------------------------------------------------
+5. DELIVERABLES INCLUDED IN REPOSITORY
+----------------------------------------------------------------------
+- live_monitor.py : Live Forensic Carving & Monitoring Daemon
+- verity_stealer.py : 41ms Infostealer Threat Vector PoC
+- snappy_test.py : Pure-Python Snappy Decompression Engine
+- index.html & app.js : Forensic Web Dashboard UI with WebCrypto Verification
+- README.md & LICENSE : Full documentation and MIT License
+- docs/ : Research Paper PDF, Presentation Slides PDF, Poster PDF, Arsenal Proposal PDF
+
+Repository: https://github.com/prajwalchowdary2/tinker-tailor-llm-spy-bheu
+======================================================================
