@@ -80,8 +80,8 @@ When users click "Delete Chat" inside interfaces like ChatGPT, Claude, Gemini, o
 
 ```bash
 # Clone the repository
-git clone https://github.com/prajwalchowdary2/tinker-tailor-llm-spy.git
-cd tinker-tailor-llm-spy
+git clone https://github.com/prajwalchowdary2/tinker-tailor-llm-spy-bheu.git
+cd tinker-tailor-llm-spy-bheu
 
 # Install lightweight requirements
 pip install -r requirements.txt
