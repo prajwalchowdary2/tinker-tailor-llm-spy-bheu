@@ -12,3 +12,6 @@ LOCK
 # OS files
 .DS_Store
 Thumbs.db
+forensic_report.html
+evidence.json
+*.json

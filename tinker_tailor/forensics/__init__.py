@@ -1,7 +1,7 @@
 """
 Forensic utilities: chain of custody, browser history, blob storage,
 session restore, omnibox shortcuts, Cursor AI IDE, cache storage,
-and deep Chrome artifact extraction.
+and deep Chrome artifact extraction (13-layer suite).
 """
 
 from tinker_tailor.forensics.chain_of_custody import sign_evidence, verify_evidence
@@ -18,6 +18,8 @@ from tinker_tailor.forensics.deep_chrome import (
     scan_ai_downloads,
     scan_extension_secrets,
     scan_desktop_app_keys,
+    scan_cross_profile_isolation,
+    scan_electron_app_cookies,
 )
 
 __all__ = [
@@ -35,4 +37,6 @@ __all__ = [
     "scan_ai_downloads",
     "scan_extension_secrets",
     "scan_desktop_app_keys",
+    "scan_cross_profile_isolation",
+    "scan_electron_app_cookies",
 ]

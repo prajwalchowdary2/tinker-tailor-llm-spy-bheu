@@ -98,15 +98,25 @@ flowchart TD
 
 ---
 
-## 🔥 Key Vulnerabilities Uncovered
+## 🔥 Key Vulnerabilities Uncovered (13 Classes)
 
-| # | Vulnerability Class | Affected Platform | Root Cause & Real-World Impact |
-|:---:|:---|:---|:---|
-| **1** | **LevelDB LSM Data Remanence** | ChatGPT, Claude, Gemini | Deleted conversations persist in uncompacted WAL (`.log`) and SSTable (`.ldb`) records. **506 text artifacts recovered (70.8% UI-deleted); 83-day persistence.** |
-| **2** | **Pre-Send Keystroke Caching** | Claude (Anthropic) | In-flight prompts are written to `tipTapEditorState` in IndexedDB *before* clicking 'Send'. **148 unsubmitted draft fragments recovered.** |
-| **3** | **Plaintext Document Blobs** | Claude, Chromium | Uploaded attachments (PDFs, source code, data sheets) are saved as raw unencrypted files in `.indexeddb.blob/`. **10MB confidential PDF recovered intact.** |
-| **4** | **ECDSA Private Key Exposure** | ChatGPT Desktop (`com.openai.atlas`) | Raw WebRTC ECDSA private keys (`BEGIN PRIVATE KEY`) stored in plaintext LevelDB logs alongside user chat transcripts. |
-| **5** | **AI Extension Local State** | Google Gemini (`glic`) | Conversation state and keys (`BARD_EMBED_CHAT_STORAGE_KEY`) persisted in unencrypted Local Storage LevelDB files. |
+| # | Vulnerability Class | Severity | Affected Platform | Root Cause & Real-World Impact |
+|:---:|:---|:---:|:---|:---|
+| **1** | **LevelDB LSM Data Remanence** | 🔴 CRITICAL | ChatGPT, Claude, Gemini | Deleted conversations persist in uncompacted WAL (`.log`) and SSTable (`.ldb`) records. **506 text artifacts recovered (70.8% UI-deleted); 83-day persistence.** |
+| **2** | **Plaintext Document Blob Survival** | 🔴 CRITICAL | Claude, Chromium | Uploaded attachments (PDFs, source code, data sheets) saved as raw unencrypted files in `.indexeddb.blob/`. **10MB confidential PDF recovered intact.** |
+| **3** | **Pre-Send Keystroke Draft Caching** | 🟠 HIGH | Claude (Anthropic) | In-flight prompts written to `tipTapEditorState` in IndexedDB *before* clicking 'Send'. **148 unsubmitted draft fragments recovered.** |
+| **4** | **Cursor AI IDE Composer Leakage** | 🟠 HIGH | Cursor IDE | `state.vscdb` SQLite stores full Composer AI chat sessions, model configs, and terminal command history. |
+| **5** | **Service Worker CacheStorage Persistence** | 🟠 HIGH | Gemini, Perplexity | Cached AI API responses and authentication handshakes persist in CacheStorage after deletion. |
+| **6** | **SNSS Session Restore Tab Remanence** | 🟡 MEDIUM | All Chromium | Binary SNSS session files retain AI conversation tab URLs with exact UUIDs even after tab close. |
+| **7** | **Omnibox Typed Query Leakage** | 🟡 MEDIUM | All Chromium | `Shortcuts` SQLite database stores raw user-typed search text with destination URLs and timestamps. |
+| **8** | **Mass Session Cookie Exposure** | 🔴 CRITICAL | ChatGPT, Claude, Gemini | **631 active AI session cookies** across 23 profiles. Encrypted with Keychain-derived key, but decryptable by any same-user process. |
+| **9** | **Conversation URL + Title Persistence** | 🟠 HIGH | All Chromium | **38 conversation URLs with descriptive titles** (e.g., "Android encryption forensics methodology") persist in History DB, revealing user intent without chat content. |
+| **10** | **AI Download Record Trail** | 🟠 HIGH | Claude, ChatGPT | **65 download records** from AI portals (exam papers, reports, honeypot tools) with full source URLs and file metadata. |
+| **11** | **Extension API Key & JWT Leakage** | 🔴 CRITICAL | Chrome Extensions | **OpenAI `sk-` API keys and RS256 JWT tokens** stored in plaintext in extension LevelDB storage. Includes decoded email and auth claims. |
+| **12** | **Desktop App Private Key Exposure** | 🔴 CRITICAL | ChatGPT Desktop (`com.openai.atlas`) | **3 ECDSA private cryptographic keys** (`-----BEGIN PRIVATE KEY-----`) stored in plaintext IndexedDB WAL alongside user IDs and conversation titles. |
+| **13** | **Cross-Profile Isolation Failure** | 🟠 HIGH | All Chromium | **All 24+ profile IndexedDB directories owned by same UID (501)**. Zero OS-level isolation — a single user-level process reads every profile's data without privilege escalation. |
+
+> ⚠️ **Keychain Encryption Gap:** macOS Keychain only encrypts cookie values and saved passwords (2 SQLite columns). **95%+ of sensitive artifacts** — conversations, private keys, API keys, documents, history, autofill — are stored in completely unprotected plaintext files.
 
 ---
 
@@ -137,21 +147,28 @@ Navigate to **`http://127.0.0.1:8000`** in your browser to view live recovered c
 ### 3. Running the Headless CLI Engine
 
 ```bash
-# Scan all local browser profiles and print a summary table
-python3 -m tinker_tailor scan
+# Full 13-Layer forensic audit (all vulnerability classes)
+python3 -m tinker_tailor.cli --all
 
-# Deep scan with full conversation transcript reconstruction
-python3 -m tinker_tailor scan --verbose
+# Generate HTML forensic triage report (counts only, no raw data)
+python3 -m tinker_tailor.cli --all --report
 
-# Export evidence to JSON with HMAC-SHA256 cryptographic seal
-python3 -m tinker_tailor scan --output evidence.json --sign
+# Original 7 layers only (LevelDB, blobs, sessions, shortcuts, cache, cursor)
+python3 -m tinker_tailor.cli --scan
 
-# Scan a specific LevelDB directory
-python3 -m tinker_tailor scan --path ~/Library/Application\ Support/Google/Chrome/Default/IndexedDB/https_chatgpt.com_0.indexeddb.leveldb
+# Deep Chrome analysis only (Layers 8-13: cookies, history, downloads, extensions, desktop apps, isolation)
+python3 -m tinker_tailor.cli --deep
 
-# Run real-time Shadow AI DLP credential scanner
-python3 -m tinker_tailor dlp
+# Individual layer scanning
+python3 -m tinker_tailor.cli --cookies        # Layer 8: AI session cookies
+python3 -m tinker_tailor.cli --extensions     # Layer 11: Extension API key & JWT leakage
+python3 -m tinker_tailor.cli --desktop        # Layer 12: Desktop app private keys
+python3 -m tinker_tailor.cli --isolation      # Layer 13: Cross-profile isolation check
+
+# Export signed evidence to JSON
+python3 -m tinker_tailor.cli --all --output evidence.json --sign
 ```
+
 
 ---
 

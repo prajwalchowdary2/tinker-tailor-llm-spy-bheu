@@ -263,3 +263,72 @@ def scan_desktop_app_keys() -> List[Dict[str, Any]]:
                     except Exception:
                         pass
     return results
+
+
+def scan_cross_profile_isolation() -> Dict[str, Any]:
+    """Check OS-level isolation between Chrome profiles.
+
+    Verifies that all Chrome profile directories are owned by the same UID,
+    proving that a single user-level process can access all profiles' data
+    (conversations, cookies, credentials) without privilege escalation.
+    """
+    base = _chrome_base()
+    result = {
+        "total_profiles": 0,
+        "unique_uids": set(),
+        "profiles": [],
+        "isolation_failure": False,
+    }
+    for idb_dir in glob.glob(f"{base}/*/IndexedDB"):
+        profile = _get_profile(idb_dir)
+        try:
+            stat = os.stat(idb_dir)
+            result["profiles"].append({
+                "profile": profile,
+                "uid": stat.st_uid,
+                "mode": oct(stat.st_mode),
+            })
+            result["unique_uids"].add(stat.st_uid)
+            result["total_profiles"] += 1
+        except Exception:
+            pass
+    result["unique_uids"] = list(result["unique_uids"])
+    result["isolation_failure"] = len(result["unique_uids"]) == 1 and result["total_profiles"] > 1
+    return result
+
+
+def scan_electron_app_cookies() -> List[Dict[str, Any]]:
+    """Extract session cookie metadata from Electron AI desktop apps."""
+    results = []
+    home = os.path.expanduser("~")
+    app_dirs = [
+        ("ChatGPT Desktop", f"{home}/Library/Application Support/com.openai.atlas"),
+        ("ChatGPT Desktop (chat)", f"{home}/Library/Application Support/com.openai.chat"),
+        ("Claude Desktop", f"{home}/Library/Application Support/Claude"),
+    ]
+    for app_name, app_dir in app_dirs:
+        if not os.path.exists(app_dir):
+            continue
+        for cookie_db in glob.glob(f"{app_dir}/**/Cookies", recursive=True):
+            try:
+                conn = sqlite3.connect(f"file:{cookie_db}?mode=ro", uri=True)
+                c = conn.cursor()
+                c.execute("""
+                    SELECT host_key, name, length(encrypted_value),
+                           is_httponly, is_secure, path
+                    FROM cookies
+                """)
+                for host, name, enc_len, httponly, secure, path in c.fetchall():
+                    results.append({
+                        "app": app_name,
+                        "host": host,
+                        "cookie_name": name,
+                        "encrypted_value_bytes": enc_len,
+                        "httponly": bool(httponly),
+                        "secure": bool(secure),
+                        "path": path,
+                    })
+                conn.close()
+            except Exception:
+                pass
+    return results
