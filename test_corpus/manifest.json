@@ -1,0 +1,24 @@
+{
+  "description": "Synthetic test corpus for TINKER TAILOR",
+  "profiles": [
+    {
+      "name": "chatgpt_profile",
+      "platform": "chatgpt",
+      "expected_conversations": 3,
+      "expected_messages": 7,
+      "path": "chatgpt_profile/IndexedDB/https_chatgpt.com_0.indexeddb.leveldb"
+    },
+    {
+      "name": "claude_profile",
+      "platform": "claude",
+      "expected_drafts": 6,
+      "path": "claude_profile/IndexedDB/https_claude.ai_0.indexeddb.leveldb"
+    },
+    {
+      "name": "generic_profile",
+      "platform": "deepseek",
+      "expected_prompts": 3,
+      "path": "generic_profile/IndexedDB/https_chat.deepseek.com_0.indexeddb.leveldb"
+    }
+  ]
+}
