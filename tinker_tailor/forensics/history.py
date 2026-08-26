@@ -174,3 +174,20 @@ def parse_firefox_history(db_path: str) -> List[Dict]:
     except Exception:
         pass
     return results
+
+
+def extract_browser_history(paths: Dict) -> Dict[str, List[Dict]]:
+    """
+    Extract AI visits across all detected browser history databases.
+    """
+    history_data = {}
+    if paths.get("chrome_history") and os.path.exists(paths["chrome_history"]):
+        history_data["chrome"] = parse_chrome_history(paths["chrome_history"])
+    if paths.get("edge_history") and os.path.exists(paths["edge_history"]):
+        history_data["edge"] = parse_chrome_history(paths["edge_history"])
+    if paths.get("safari_history") and os.path.exists(paths["safari_history"]):
+        history_data["safari"] = parse_safari_history(paths["safari_history"])
+    if paths.get("firefox_history") and os.path.exists(paths["firefox_history"]):
+        history_data["firefox"] = parse_firefox_history(paths["firefox_history"])
+    return history_data
+
