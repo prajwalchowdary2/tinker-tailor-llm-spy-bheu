@@ -74,7 +74,7 @@ flowchart TD
 
     subgraph INTERFACES[" 🚀 Dual Operational Interfaces "]
         direction LR
-        UI["<b>Interactive Web Dashboard</b><br/><code>live_monitor.py</code> (Port 8888)<br/>• Real-time threat heatmap<br/>• Interactive conversation tree<br/>• Live DLP credential alerts<br/>• WebCrypto HMAC verification"]
+        UI["<b>Interactive Web Dashboard</b><br/><code>live_monitor.py</code> (Port 8000)<br/>• Real-time threat heatmap<br/>• Interactive conversation tree<br/>• Live DLP credential alerts<br/>• WebCrypto HMAC verification"]
         CLI["<b>Headless Incident Response CLI</b><br/><code>python3 -m tinker_tailor scan</code><br/>• Sub-150ms endpoint scan<br/>• JSON/CSV forensic telemetry<br/>• Scriptable EDR / SIEM integration<br/>• Zero compiled dependencies"]
     end
 
@@ -132,7 +132,7 @@ Run the background daemon and open the interactive dashboard:
 # On Windows:
 start.bat
 ```
-Navigate to **`http://127.0.0.1:8888`** in your browser to view live recovered conversations, draft fragments, and DLP security alerts.
+Navigate to **`http://127.0.0.1:8000`** in your browser to view live recovered conversations, draft fragments, and DLP security alerts.
 
 ### 3. Running the Headless CLI Engine
 
