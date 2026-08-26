@@ -163,7 +163,7 @@ python3 reproduce_figures.py
 
 ## 📄 Research Documentation & Papers
 
-* 📑 **Full Research Paper:** [`docs/Tinker_Tailor_Research_Paper.pdf`](docs/Tinker_Tailor_Research_Paper.pdf)
+* 📑 **Full Research Paper:** [`docs/Tinker_Tailor_LLM_Spy_Paper.pdf`](docs/Tinker_Tailor_LLM_Spy_Paper.pdf)
 * 🛡️ **Vulnerability Summary Report:** [`docs/Vulnerability_Summary_Report.pdf`](docs/Vulnerability_Summary_Report.pdf)
 * 📋 **Responsible Disclosure Details:** [`DISCLOSURE.md`](DISCLOSURE.md)
 * 🔬 **Artifact Reproduction Guide:** [`REPRODUCE.md`](REPRODUCE.md)
