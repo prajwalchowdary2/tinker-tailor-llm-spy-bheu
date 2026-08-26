@@ -1,8 +1,8 @@
 platform,case_id,expected_count,recovered_count,true_positives,precision,recall,f1,elapsed_ms
-chatgpt,46b455aa-d823-4a3e-b090-ac453713dab4,3,3,3,1.0,1.0,1.0,0.08
-chatgpt,cc950377-4223-4bd2-a39b-1235ec91b2d3,2,2,2,1.0,1.0,1.0,0.04
-chatgpt,0c961bb4-186d-49c6-8f62-ef7cbb39c5ee,2,2,2,1.0,1.0,1.0,0.03
+chatgpt,9649c4d0-8abb-48a8-b44c-328d59414005,3,3,3,1.0,1.0,1.0,0.08
+chatgpt,4fabdd4d-fdb4-4c07-8d07-0671b53fb22c,2,2,2,1.0,1.0,1.0,0.03
+chatgpt,6553fe25-e474-4c26-b2b3-09fcbe74b104,2,2,2,1.0,1.0,1.0,0.03
 claude,claude_draft,1,1,1,1.0,1.0,1.0,0.07
-claude,claude_draft,1,1,1,1.0,1.0,1.0,0.03
-deepseek,deepseek_generic,2,2,2,1.0,1.0,1.0,0.29
+claude,claude_draft,1,1,1,1.0,1.0,1.0,0.02
+deepseek,deepseek_generic,2,2,2,1.0,1.0,1.0,0.28
 perplexity,perplexity_generic,1,1,1,1.0,1.0,1.0,0.02
