@@ -1,4 +1,4 @@
-# Tinker Tailor LLM Spy: Reconstructing "Deleted" Chats & Hijacking Sessions from Chromium LevelDB Caches
+# Tinker Tailor LLM Spy: 13 Vulnerability Classes in Reconstructing "Deleted" Chats & Hijacking Sessions from Chromium LevelDB Caches
 
 **Authors:**
 1. **Dr. Sapna V M** (Associate Professor, Dept of CSE, PES University, Bangalore) — `sapnavm@pes.edu`
@@ -16,7 +16,7 @@
 
 As Large Language Model (LLM) web portals and native desktop applications become standard corporate utilities, proprietary source code, internal spreadsheets, and API credentials are routinely processed by users. When a user clicks **"Delete Chat"** inside interfaces like ChatGPT, Claude, or Gemini, they expect their local footprint to be permanently erased. However, because Chromium-based browsers (Chrome, Edge, Brave) and Electron desktop clients store this telemetry inside IndexedDB databases backed by Google's LevelDB engine and file blob stores, these deleted records persist on disk in Write-Ahead Logs (`.log`), uncompacted Sorted String Tables (`.sst`/`.ldb`), and unencrypted blob trees (`.indexeddb.blob/`).
 
-This paper details our reverse engineering of client-side LLM storage schemas, V8 structured clone deserialization, and parallel binary blob stores. We uncover four critical endpoint vulnerability classes:
+This paper details our reverse engineering of client-side LLM storage schemas, V8 structured clone deserialization, and parallel binary blob stores. We uncover 13 critical endpoint vulnerability classes:
 1. **LSM-Tree Data Remanence:** 70.8% of recovered chat artifacts across 23 real-world profiles had already been deleted from the cloud UI.
 2. **Pre-Submission Keystroke Caching:** Claude's TipTap editor persists unsubmitted keystroke drafts to disk *before* the user clicks 'Send'.
 3. **Unencrypted Document Blobs:** Uploaded proprietary files (10MB PDFs, code files) are stored as raw, plaintext binary blobs on disk, persisting indefinitely past chat deletion.
@@ -65,6 +65,35 @@ The official ChatGPT Desktop application (`com.openai.atlas`) runs as an Electro
 
 ### 2.5. Vulnerability 5: Google Gemini Assistant (`glic`) Local Storage Persistence
 Chrome's built-in Gemini extension (`glic`) persists conversation keys (`BARD_EMBED_CHAT_STORAGE_KEY`, `BARD_EMBED_CHAT_STORAGE_KEY_V2`) and session state in Local Storage LevelDB files, confirming that Google's own integrated browser assistant shares the identical client-side persistence exposure.
+
+### 2.6. Vulnerability Class 6: SNSS Session Restore Tab Remanence
+Binary SNSS session files retain AI conversation tab URLs with exact UUIDs even after tab close. 157 AI tab events recovered.
+
+### 2.7. Vulnerability Class 7: Omnibox Typed Query Leakage
+Shortcuts SQLite stores raw typed search text. 588 queries recovered.
+
+### 2.8. Vulnerability Class 8: Mass Session Cookie Exposure
+631 active AI session cookies across 23 profiles. Encrypted with Keychain-derived key but decryptable by same-user process.
+
+### 2.9. Vulnerability Class 9: Conversation URL + Title Persistence
+38 conversation URLs with descriptive titles persist in History DB revealing user intent.
+
+### 2.10. Vulnerability Class 10: AI Download Record Trail
+65 download records from AI portals with full source URLs and file metadata.
+
+### 2.11. Vulnerability Class 11: Extension API Key & JWT Leakage
+OpenAI sk- API keys and RS256 JWT tokens stored in plaintext in extension LevelDB. This is CRITICAL severity.
+
+### 2.12. Vulnerability Class 12: Desktop App Private Key Exposure
+3 ECDSA private keys in com.openai.atlas stored in plaintext WAL. CRITICAL severity.
+
+### 2.13. Vulnerability Class 13: Cross-Profile Isolation Failure
+All 24+ profile directories owned by same UID. Zero OS-level isolation.
+
+## The Keychain Encryption Gap
+
+macOS Keychain only encrypts 2 SQLite columns (cookie encrypted_value, password password_value) while 95%+ of sensitive data is stored in plaintext. This is a FALSE SENSE OF SECURITY finding.
+
 
 ---
 
@@ -160,7 +189,7 @@ The interactive dashboard verifies this signature client-side via `window.crypto
 | Benchmark Metric | Measured Result |
 |---|---|
 | **Total Profiles Scanned** | 23 browser profiles (macOS workstation) |
-| **Total Text Artifacts Recovered** | 506 artifacts |
+| **Total Artifacts Recovered** | ~3,500 total artifacts |
 | **UI-Deleted Chat Recovery Rate** | 70.8% (358 / 506 artifacts) |
 | **Longest Observed Persistence** | 83 days (low write volume partition) |
 | **End-to-End Scan Speed** | 147–163 ms across all 23 profiles |
