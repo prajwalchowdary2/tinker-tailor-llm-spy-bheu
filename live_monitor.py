@@ -138,7 +138,7 @@ def get_forensic_paths():
                 if os.path.isdir(profile_path) and (item == "Default" or item.startswith("Profile ")):
                     c_idb = os.path.join(profile_path, "IndexedDB")
                     if os.path.exists(c_idb):
-                        for bot, host in [("chatgpt", "https_chatgpt.com_0"), ("claude", "https_claude.ai_0"), ("gemini", "https_gemini.google.com_0")]:
+                        for bot, host in [("chatgpt", "https_chatgpt.com_0"), ("claude", "https_claude.ai_0"), ("claude", "https_platform.claude.com_0"), ("gemini", "https_gemini.google.com_0"), ("gemini", "https_bard.google.com_0"), ("deepseek", "https_chat.deepseek.com_0"), ("perplexity", "https_perplexity.ai_0")]:
                             db_p = os.path.join(c_idb, f"{host}.indexeddb.leveldb")
                             if os.path.exists(db_p):
                                 paths["indexeddb"][f"{bot}_browser_chrome_{item}"] = db_p
@@ -150,13 +150,14 @@ def get_forensic_paths():
                 if os.path.isdir(profile_path) and (item == "Default" or item.startswith("Profile ")):
                     e_idb = os.path.join(profile_path, "IndexedDB")
                     if os.path.exists(e_idb):
-                        for bot, host in [("chatgpt", "https_chatgpt.com_0"), ("claude", "https_claude.ai_0"), ("gemini", "https_gemini.google.com_0")]:
+                        for bot, host in [("chatgpt", "https_chatgpt.com_0"), ("claude", "https_claude.ai_0"), ("claude", "https_platform.claude.com_0"), ("gemini", "https_gemini.google.com_0"), ("gemini", "https_bard.google.com_0"), ("deepseek", "https_chat.deepseek.com_0"), ("perplexity", "https_perplexity.ai_0")]:
                             db_p = os.path.join(e_idb, f"{host}.indexeddb.leveldb")
                             if os.path.exists(db_p):
                                 paths["indexeddb"][f"{bot}_browser_edge_{item}"] = db_p
                                 
         # Native Desktop Apps LevelDB locations
         paths["indexeddb"]["chatgpt_desktop"] = os.path.join(home, "Library/Application Support/com.openai.chat/IndexedDB/https_chatgpt.com_0.indexeddb.leveldb")
+        paths["indexeddb"]["chatgpt_desktop_atlas"] = os.path.join(home, "Library/Application Support/com.openai.atlas/IndexedDB/https_chatgpt.com_0.indexeddb.leveldb")
         paths["indexeddb"]["claude_desktop"] = os.path.join(home, "Library/Application Support/Claude/IndexedDB/https_claude.ai_0.indexeddb.leveldb")
         
     elif sys.platform == "win32":

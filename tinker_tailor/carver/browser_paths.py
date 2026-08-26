@@ -17,7 +17,11 @@ from typing import Dict, Optional
 BOT_HOSTS_MAC = [
     ("chatgpt", "https_chatgpt.com_0"),
     ("claude", "https_claude.ai_0"),
+    ("claude", "https_platform.claude.com_0"),
     ("gemini", "https_gemini.google.com_0"),
+    ("gemini", "https_bard.google.com_0"),
+    ("deepseek", "https_chat.deepseek.com_0"),
+    ("perplexity", "https_perplexity.ai_0"),
 ]
 
 BOT_HOSTS_WIN = [
@@ -116,6 +120,9 @@ def get_forensic_paths() -> Dict:
 
         paths["indexeddb"]["chatgpt_desktop"] = os.path.join(
             home, "Library/Application Support/com.openai.chat/IndexedDB/https_chatgpt.com_0.indexeddb.leveldb"
+        )
+        paths["indexeddb"]["chatgpt_desktop_atlas"] = os.path.join(
+            home, "Library/Application Support/com.openai.atlas/IndexedDB/https_chatgpt.com_0.indexeddb.leveldb"
         )
         paths["indexeddb"]["claude_desktop"] = os.path.join(
             home, "Library/Application Support/Claude/IndexedDB/https_claude.ai_0.indexeddb.leveldb"
