@@ -1,0 +1,9 @@
+mutation,structured_recall,full_recall,recovering_path
+baseline (observed schema),1.0,1.0,structured
+reordered keys (text before id),1.0,1.0,structured
+renamed id field (id->uuid),1.0,1.0,structured
+renamed text field (text->content),0.0,0.0,none
+renamed anchor (messages->mapping),0.0,1.0,fallback
+added nesting (text one level deeper),0.0,1.0,fallback
+renamed anchor + kept text field,0.0,1.0,fallback
+combined drift (rename anchor+text),0.0,0.0,none

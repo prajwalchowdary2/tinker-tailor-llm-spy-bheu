@@ -1,0 +1,240 @@
+{
+  "metrics": {
+    "ablation": {
+      "full_pipeline": {
+        "F1": 1.0,
+        "P": 1.0,
+        "R": 1.0,
+        "cases": 7
+      },
+      "generic_only": {
+        "F1": 0.5714,
+        "P": 0.5714,
+        "R": 0.5714,
+        "cases": 7
+      },
+      "snappy_with": {
+        "F1": 1.0,
+        "P": 1.0,
+        "R": 1.0,
+        "cases": 3
+      },
+      "snappy_without": {
+        "F1": 0.3333,
+        "P": 0.3333,
+        "R": 0.3333,
+        "cases": 3
+      },
+      "without_depth": {
+        "F1": 1.0,
+        "P": 1.0,
+        "R": 1.0,
+        "cases": 7
+      },
+      "without_tiptap": {
+        "F1": 1.0,
+        "P": 1.0,
+        "R": 1.0,
+        "cases": 7
+      },
+      "without_v8": {
+        "F1": 0.5714,
+        "P": 0.5714,
+        "R": 0.5714,
+        "cases": 7
+      }
+    },
+    "corruption": {
+      "random_byte|1%|t1": 0,
+      "random_byte|1%|t10": 2,
+      "random_byte|1%|t2": 0,
+      "random_byte|1%|t3": 4,
+      "random_byte|1%|t4": 5,
+      "random_byte|1%|t5": 0,
+      "random_byte|1%|t6": 4,
+      "random_byte|1%|t7": 5,
+      "random_byte|1%|t8": 4,
+      "random_byte|1%|t9": 2,
+      "random_byte|10%|t1": 0,
+      "random_byte|10%|t10": 0,
+      "random_byte|10%|t2": 0,
+      "random_byte|10%|t3": 0,
+      "random_byte|10%|t4": 0,
+      "random_byte|10%|t5": 0,
+      "random_byte|10%|t6": 0,
+      "random_byte|10%|t7": 0,
+      "random_byte|10%|t8": 0,
+      "random_byte|10%|t9": 0,
+      "random_byte|2%|t1": 3,
+      "random_byte|2%|t10": 2,
+      "random_byte|2%|t2": 2,
+      "random_byte|2%|t3": 4,
+      "random_byte|2%|t4": 5,
+      "random_byte|2%|t5": 2,
+      "random_byte|2%|t6": 3,
+      "random_byte|2%|t7": 0,
+      "random_byte|2%|t8": 3,
+      "random_byte|2%|t9": 0,
+      "random_byte|20%|t1": 0,
+      "random_byte|20%|t10": 0,
+      "random_byte|20%|t2": 0,
+      "random_byte|20%|t3": 0,
+      "random_byte|20%|t4": 0,
+      "random_byte|20%|t5": 0,
+      "random_byte|20%|t6": 0,
+      "random_byte|20%|t7": 0,
+      "random_byte|20%|t8": 0,
+      "random_byte|20%|t9": 0,
+      "random_byte|3%|t1": 1,
+      "random_byte|3%|t10": 1,
+      "random_byte|3%|t2": 0,
+      "random_byte|3%|t3": 0,
+      "random_byte|3%|t4": 0,
+      "random_byte|3%|t5": 1,
+      "random_byte|3%|t6": 0,
+      "random_byte|3%|t7": 1,
+      "random_byte|3%|t8": 2,
+      "random_byte|3%|t9": 0,
+      "random_byte|5%|t1": 0,
+      "random_byte|5%|t10": 0,
+      "random_byte|5%|t2": 1,
+      "random_byte|5%|t3": 0,
+      "random_byte|5%|t4": 0,
+      "random_byte|5%|t5": 0,
+      "random_byte|5%|t6": 1,
+      "random_byte|5%|t7": 0,
+      "random_byte|5%|t8": 1,
+      "random_byte|5%|t9": 0,
+      "truncation|10%|t1": 0,
+      "truncation|25%|t1": 1,
+      "truncation|50%|t1": 2,
+      "truncation|60%|t1": 3,
+      "truncation|75%|t1": 3,
+      "truncation|90%|t1": 4,
+      "truncation|95%|t1": 5,
+      "zero_fill|pos=10%_block=10%|t1": 0,
+      "zero_fill|pos=25%_block=10%|t1": 1,
+      "zero_fill|pos=50%_block=10%|t1": 2,
+      "zero_fill|pos=75%_block=10%|t1": 4,
+      "zero_fill|pos=90%_block=10%|t1": 4
+    },
+    "recovery": {
+      "00:chatgpt": {
+        "F1": 1.0,
+        "P": 1.0,
+        "R": 1.0
+      },
+      "01:chatgpt": {
+        "F1": 1.0,
+        "P": 1.0,
+        "R": 1.0
+      },
+      "02:chatgpt": {
+        "F1": 1.0,
+        "P": 1.0,
+        "R": 1.0
+      },
+      "03:claude": {
+        "F1": 1.0,
+        "P": 1.0,
+        "R": 1.0
+      },
+      "04:claude": {
+        "F1": 1.0,
+        "P": 1.0,
+        "R": 1.0
+      },
+      "05:deepseek": {
+        "F1": 1.0,
+        "P": 1.0,
+        "R": 1.0
+      },
+      "06:perplexity": {
+        "F1": 1.0,
+        "P": 1.0,
+        "R": 1.0
+      }
+    },
+    "role_assignment": {
+      "assistant-first transcript": 0.0,
+      "interleaved tool call": 0.167,
+      "leading system prompt": 0.0,
+      "one regenerated response": 0.333,
+      "strict alternation (user first)": 1.0,
+      "two regenerations": 0.833
+    },
+    "schema_drift": {
+      "added nesting (text one level deeper)": {
+        "full": 1.0,
+        "path": "fallback",
+        "struct": 0.0
+      },
+      "baseline (observed schema)": {
+        "full": 1.0,
+        "path": "structured",
+        "struct": 1.0
+      },
+      "combined drift (rename anchor+text)": {
+        "full": 0.0,
+        "path": "none",
+        "struct": 0.0
+      },
+      "renamed anchor (messages->mapping)": {
+        "full": 1.0,
+        "path": "fallback",
+        "struct": 0.0
+      },
+      "renamed anchor + kept text field": {
+        "full": 1.0,
+        "path": "fallback",
+        "struct": 0.0
+      },
+      "renamed id field (id->uuid)": {
+        "full": 1.0,
+        "path": "structured",
+        "struct": 1.0
+      },
+      "renamed text field (text->content)": {
+        "full": 0.0,
+        "path": "none",
+        "struct": 0.0
+      },
+      "reordered keys (text before id)": {
+        "full": 1.0,
+        "path": "structured",
+        "struct": 1.0
+      }
+    },
+    "unicode": {
+      "Chinese|chatgpt|OneByteString (0x22 UTF-8)": true,
+      "Chinese|chatgpt|TwoByteString (0x63 UTF-16LE)": true,
+      "Chinese|claude|TipTap JSON (UTF-8)": true,
+      "Chinese|generic|Generic JSON regex": false,
+      "Emoji|chatgpt|OneByteString (0x22 UTF-8)": true,
+      "Emoji|chatgpt|TwoByteString (0x63 UTF-16LE)": true,
+      "Emoji|claude|TipTap JSON (UTF-8)": true,
+      "Emoji|generic|Generic JSON regex": false,
+      "English|chatgpt|OneByteString (0x22 UTF-8)": true,
+      "English|chatgpt|TwoByteString (0x63 UTF-16LE)": true,
+      "English|claude|TipTap JSON (UTF-8)": true,
+      "English|generic|Generic JSON regex": true,
+      "Hindi|chatgpt|OneByteString (0x22 UTF-8)": true,
+      "Hindi|chatgpt|TwoByteString (0x63 UTF-16LE)": true,
+      "Hindi|claude|TipTap JSON (UTF-8)": true,
+      "Hindi|generic|Generic JSON regex": false,
+      "Japanese|chatgpt|OneByteString (0x22 UTF-8)": true,
+      "Japanese|chatgpt|TwoByteString (0x63 UTF-16LE)": true,
+      "Japanese|claude|TipTap JSON (UTF-8)": true,
+      "Japanese|generic|Generic JSON regex": false,
+      "Math|chatgpt|OneByteString (0x22 UTF-8)": true,
+      "Math|chatgpt|TwoByteString (0x63 UTF-16LE)": true,
+      "Math|claude|TipTap JSON (UTF-8)": true,
+      "Math|generic|Generic JSON regex": false,
+      "Mixed|chatgpt|OneByteString (0x22 UTF-8)": true,
+      "Mixed|chatgpt|TwoByteString (0x63 UTF-16LE)": true,
+      "Mixed|claude|TipTap JSON (UTF-8)": true,
+      "Mixed|generic|Generic JSON regex": false
+    }
+  },
+  "sha256": "b3b1c67fb80e3664f392dfbf406c60adfb37e4f92a9ceb5711bb74e9cd97c213"
+}

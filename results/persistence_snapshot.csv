@@ -1,0 +1,4 @@
+run_id,timestamp,source_label,bot,leveldb_dir,prompts_recovered,conversations_recovered,messages_recovered,bytes_recovered,log_files,ldb_files,sst_files,carve_time_ms
+snapshot_20260809_100559,2026-08-09 10:05:59,chatgpt_browser_chrome_Profile33,chatgpt,/Users/apple/Library/Application Support/Google/Chrome/Profile 33/IndexedDB/https_chatgpt.com_0.indexeddb.leveldb,8,2,3,5459,1,0,0,0.6
+snapshot_20260809_100559,2026-08-09 10:05:59,claude_browser_chrome_Profile33,claude,/Users/apple/Library/Application Support/Google/Chrome/Profile 33/IndexedDB/https_claude.ai_0.indexeddb.leveldb,0,0,0,0,1,0,0,0.38
+snapshot_20260809_100559,2026-08-09 10:05:59,claude_desktop,claude,/Users/apple/Library/Application Support/Claude/IndexedDB/https_claude.ai_0.indexeddb.leveldb,44,0,0,1774,1,1,0,170.72

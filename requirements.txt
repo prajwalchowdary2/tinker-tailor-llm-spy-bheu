@@ -1,1 +1,7 @@
+# Tinker Tailor LLM Spy — Requirements
+# Core tool has zero mandatory dependencies (pure Python 3.8+)
+
+# Optional dependencies for evaluation, forensic signing, and figure reproduction:
 cryptography>=41.0.0
+matplotlib>=3.7.0
+numpy>=1.24.0

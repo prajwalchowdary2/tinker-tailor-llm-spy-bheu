@@ -1,0 +1,29 @@
+language,encoding_type,platform,recovered_text,match,jaccard_score,note
+English,OneByteString (0x22 UTF-8),chatgpt,How do I fix a segfault in my C program?,True,1.0,ASCII-safe
+English,TwoByteString (0x63 UTF-16LE),chatgpt,How do I fix a segfault in my C program?,True,1.0,native V8 wide string
+English,TipTap JSON (UTF-8),claude,How do I fix a segfault in my C program?,True,1.0,JSON handles Unicode natively
+English,Generic JSON regex,generic,How do I fix a segfault in my C program?,True,1.0,regex pattern on JSON content field
+Emoji,OneByteString (0x22 UTF-8),chatgpt,Help me debug this 🐛 in my code 💻 it keeps crashing 💥,True,1.0,non-ASCII via UTF-8
+Emoji,TwoByteString (0x63 UTF-16LE),chatgpt,Help me debug this 🐛 in my code 💻 it keeps crashing 💥,True,1.0,native V8 wide string
+Emoji,TipTap JSON (UTF-8),claude,Help me debug this 🐛 in my code 💻 it keeps crashing 💥,True,1.0,JSON handles Unicode natively
+Emoji,Generic JSON regex,generic,Help me debug this \ud83d\udc1b in my code \ud83d\udcbb it keeps crashing \ud83d\udca5,False,0.625,regex pattern on JSON content field
+Hindi,OneByteString (0x22 UTF-8),chatgpt,मुझे Python में sorting algorithm समझाइए,True,1.0,non-ASCII via UTF-8
+Hindi,TwoByteString (0x63 UTF-16LE),chatgpt,मुझे Python में sorting algorithm समझाइए,True,1.0,native V8 wide string
+Hindi,TipTap JSON (UTF-8),claude,मुझे Python में sorting algorithm समझाइए,True,1.0,JSON handles Unicode natively
+Hindi,Generic JSON regex,generic,\u092e\u0941\u091d\u0947 Python \u092e\u0947\u0902 sorting algorithm \u0938\u092e\u091d\u093e\u0907\u090f,False,0.3333,regex pattern on JSON content field
+Chinese,OneByteString (0x22 UTF-8),chatgpt,请帮我优化这个SQL查询语句,True,1.0,non-ASCII via UTF-8
+Chinese,TwoByteString (0x63 UTF-16LE),chatgpt,请帮我优化这个SQL查询语句,True,1.0,native V8 wide string
+Chinese,TipTap JSON (UTF-8),claude,请帮我优化这个SQL查询语句,True,1.0,JSON handles Unicode natively
+Chinese,Generic JSON regex,generic,(none),False,0.0,regex pattern on JSON content field
+Japanese,OneByteString (0x22 UTF-8),chatgpt,このエラーメッセージの意味を教えてください,True,1.0,non-ASCII via UTF-8
+Japanese,TwoByteString (0x63 UTF-16LE),chatgpt,このエラーメッセージの意味を教えてください,True,1.0,native V8 wide string
+Japanese,TipTap JSON (UTF-8),claude,このエラーメッセージの意味を教えてください,True,1.0,JSON handles Unicode natively
+Japanese,Generic JSON regex,generic,(none),False,0.0,regex pattern on JSON content field
+Math,OneByteString (0x22 UTF-8),chatgpt,"Prove that ∀x∈ℝ, |sin(x)| ≤ 1 using the ε-δ definition",True,1.0,non-ASCII via UTF-8
+Math,TwoByteString (0x63 UTF-16LE),chatgpt,"Prove that ∀x∈ℝ, |sin(x)| ≤ 1 using the ε-δ definition",True,1.0,native V8 wide string
+Math,TipTap JSON (UTF-8),claude,"Prove that ∀x∈ℝ, |sin(x)| ≤ 1 using the ε-δ definition",True,1.0,JSON handles Unicode natively
+Math,Generic JSON regex,generic,"Prove that \u2200x\u2208\u211d, |sin(x)| \u2264 1 using the \u03b5-\u03b4 definition",False,0.5385,regex pattern on JSON content field
+Mixed,OneByteString (0x22 UTF-8),chatgpt,Debug this código 🔧: def hello(): print('こんにちは世界 🌍'),True,1.0,non-ASCII via UTF-8
+Mixed,TwoByteString (0x63 UTF-16LE),chatgpt,Debug this código 🔧: def hello(): print('こんにちは世界 🌍'),True,1.0,native V8 wide string
+Mixed,TipTap JSON (UTF-8),claude,Debug this código 🔧: def hello(): print('こんにちは世界 🌍'),True,1.0,JSON handles Unicode natively
+Mixed,Generic JSON regex,generic,Debug this c\u00f3digo \ud83d\udd27: def hello(): print('\u3053\u3093\u306b\u3061\u306f\u4e16\u754c \ud83c\udf0d'),False,0.3333,regex pattern on JSON content field
